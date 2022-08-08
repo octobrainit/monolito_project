@@ -1,0 +1,21 @@
+version: '3.7'
+networks:
+  development-network:
+    driver: bridge
+volumes:
+    my_code:
+        driver: local
+        driver_opts:
+            type: none
+            device: $PWD
+            o: bind
+services:
+  app: 
+    build:
+      context: .
+    command: bash npm i 
+    container_name: app
+    networks:
+      - development-network
+    volumes:
+      - my_code:/app/
